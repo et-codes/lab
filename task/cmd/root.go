@@ -9,6 +9,9 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// dbPath is the location of the tasks database file
+const dbPath = "./tasks.db"
+
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "task",

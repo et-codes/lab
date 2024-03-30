@@ -1,27 +1,43 @@
 /*
 Copyright © 2024 NAME HERE <EMAIL ADDRESS>
-
 */
 package cmd
 
 import (
 	"fmt"
+	"os"
 
+	"github.com/et-codes/lab/task/storage"
 	"github.com/spf13/cobra"
 )
 
 // addCmd represents the add command
 var addCmd = &cobra.Command{
-	Use:   "add",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
+	Use:   "add [task_description]",
+	Short: "Add a new task to the task list",
+	Long: `The task add command adds a new task with the provided information to the database.
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+Example:
+  task add "Get groceries for the week"`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("add called")
+		if len(args) == 0 {
+			fmt.Println("No task description provided.")
+			os.Exit(1)
+		}
+		request := storage.AddTaskRequest{
+			Description: args[0],
+		}
+		db, err := storage.OpenDB(dbPath)
+		if err != nil {
+			fmt.Printf("Error opening database: %v\n", err)
+			os.Exit(1)
+		}
+		id, err := db.AddTask(request)
+		if err != nil {
+			fmt.Printf("Error creating task: %v\n", err)
+			os.Exit(1)
+		}
+		fmt.Printf("Task created with ID %d\n", id)
 	},
 }
 

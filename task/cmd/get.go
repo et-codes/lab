@@ -1,27 +1,41 @@
 /*
 Copyright © 2024 NAME HERE <EMAIL ADDRESS>
-
 */
 package cmd
 
 import (
 	"fmt"
+	"os"
 
+	"github.com/et-codes/lab/task/storage"
 	"github.com/spf13/cobra"
 )
 
 // getCmd represents the get command
 var getCmd = &cobra.Command{
 	Use:   "get",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Get a list of all tasks",
+	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("get called")
+		db, err := storage.OpenDB(dbPath)
+		if err != nil {
+			fmt.Printf("Error opening database: %v\n", err)
+			os.Exit(1)
+		}
+		tasks, err := db.GetTasks()
+		if err != nil {
+			fmt.Printf("Error retreiving tasks: %v\n", err)
+			os.Exit(1)
+		}
+		for _, task := range tasks {
+			fmt.Printf("%d - %s - %s - %s - %s\n",
+				task.ID,
+				task.Description,
+				task.Priority,
+				task.Project,
+				task.Status,
+			)
+		}
 	},
 }
 
