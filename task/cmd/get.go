@@ -22,20 +22,14 @@ var getCmd = &cobra.Command{
 			fmt.Printf("Error opening database: %v\n", err)
 			os.Exit(1)
 		}
+
 		tasks, err := db.GetTasks()
 		if err != nil {
 			fmt.Printf("Error retreiving tasks: %v\n", err)
 			os.Exit(1)
 		}
-		for _, task := range tasks {
-			fmt.Printf("%d - %s - %s - %s - %s\n",
-				task.ID,
-				task.Description,
-				task.Priority,
-				task.Project,
-				task.Status,
-			)
-		}
+
+		displayTaskList(tasks)
 	},
 }
 
@@ -51,4 +45,17 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// getCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+}
+
+// displayTaskList formats and prints the list of tasks to the terminal.
+func displayTaskList(tasks []storage.Task) {
+	for _, task := range tasks {
+		fmt.Printf("%d - %s - %s - %s - %s\n",
+			task.ID,
+			task.Description,
+			task.Priority,
+			task.Project,
+			task.Status,
+		)
+	}
 }
