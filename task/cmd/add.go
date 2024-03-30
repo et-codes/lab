@@ -6,6 +6,7 @@ package cmd
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/et-codes/lab/task/storage"
 	"github.com/spf13/cobra"
@@ -18,26 +19,31 @@ var addCmd = &cobra.Command{
 	Long: `The task add command adds a new task with the provided information to the database.
 
 Example:
-  task add "Get groceries for the week"`,
+  task add Get groceries for the week`,
 	Run: func(cmd *cobra.Command, args []string) {
 		if len(args) == 0 {
 			fmt.Println("No task description provided.")
 			os.Exit(1)
 		}
+
+		description := strings.Join(args, " ")
 		request := storage.AddTaskRequest{
-			Description: args[0],
+			Description: description,
 		}
+
 		db, err := storage.OpenDB(dbPath)
 		if err != nil {
 			fmt.Printf("Error opening database: %v\n", err)
 			os.Exit(1)
 		}
+
 		id, err := db.AddTask(request)
 		if err != nil {
 			fmt.Printf("Error creating task: %v\n", err)
 			os.Exit(1)
 		}
-		fmt.Printf("Task created with ID %d\n", id)
+
+		fmt.Printf("Created task %d.\n\n", id)
 	},
 }
 

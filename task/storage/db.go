@@ -114,9 +114,18 @@ func (db *DB) DeleteTask(id int64) error {
 	}
 
 	query := `DELETE FROM tasks WHERE id = $1`
-	_, err := db.Exec(query, id)
+	result, err := db.Exec(query, id)
 	if err != nil {
 		return err
+	}
+
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		return err
+	}
+
+	if rowsAffected == 0 {
+		return fmt.Errorf("id %d not found", id)
 	}
 
 	return nil

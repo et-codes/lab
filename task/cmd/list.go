@@ -11,10 +11,10 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// getCmd represents the get command
-var getCmd = &cobra.Command{
-	Use:   "get",
-	Short: "Get a list of all tasks",
+// listCmd represents the get command
+var listCmd = &cobra.Command{
+	Use:   "list",
+	Short: "List all tasks",
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
 		db, err := storage.OpenDB(dbPath)
@@ -34,7 +34,7 @@ var getCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(getCmd)
+	rootCmd.AddCommand(listCmd)
 
 	// Here you will define your flags and configuration settings.
 

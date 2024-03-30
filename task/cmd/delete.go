@@ -1,27 +1,44 @@
 /*
 Copyright © 2024 NAME HERE <EMAIL ADDRESS>
-
 */
 package cmd
 
 import (
 	"fmt"
+	"os"
+	"strconv"
 
+	"github.com/et-codes/lab/task/storage"
 	"github.com/spf13/cobra"
 )
 
 // deleteCmd represents the delete command
 var deleteCmd = &cobra.Command{
-	Use:   "delete",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Use:   "delete [task_ID]",
+	Short: "Delete the task with the given ID",
+	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("delete called")
+		if len(args) != 1 {
+			fmt.Println("Invalid task ID provided.")
+			fmt.Println("Usage: task delete [task_ID]")
+			os.Exit(1)
+		}
+
+		db, err := storage.OpenDB(dbPath)
+		if err != nil {
+			fmt.Printf("Error opening database: %v\n", err)
+			os.Exit(1)
+		}
+
+		id, err := strconv.ParseInt(args[0], 10, 64)
+		if err != nil {
+			fmt.Printf("Error parsing task id: %v\n", err)
+			os.Exit(1)
+		}
+
+		if err := db.DeleteTask(id); err != nil {
+			fmt.Printf("Error deleting task: %v\n", err)
+		}
 	},
 }
 
