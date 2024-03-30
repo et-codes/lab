@@ -1,5 +1,5 @@
 build:
-	@go build -o bin/task cmd/task/*.go
+	@go build -o bin/task main.go
 
 run: build
 	@./bin/task
