@@ -20,12 +20,8 @@ var addCmd = &cobra.Command{
 
 Example:
   task add Get groceries for the week`,
+	Args: cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		if len(args) == 0 {
-			fmt.Println("No task description provided.")
-			os.Exit(1)
-		}
-
 		description := strings.Join(args, " ")
 		request := storage.AddTaskRequest{
 			Description: description,
