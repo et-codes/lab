@@ -3,11 +3,11 @@ package handlers
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
 
 	"github.com/et-codes/lab/bookings/internal/config"
 	"github.com/et-codes/lab/bookings/internal/forms"
+	"github.com/et-codes/lab/bookings/internal/helpers"
 	"github.com/et-codes/lab/bookings/internal/models"
 	"github.com/et-codes/lab/bookings/internal/render"
 )
@@ -35,17 +35,7 @@ func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
 
 // About is the about page handler
 func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
-	stringMap := map[string]string{}
-	stringMap["test"] = "Hello, again."
-
-	remoteIP, ok := m.App.Session.Get(r.Context(), "remote_ip").(string)
-	if ok {
-		stringMap["remote_ip"] = remoteIP
-	}
-
-	render.RenderTemplate(w, r, "about.page.tmpl", &models.TemplateData{
-		StringMap: stringMap,
-	})
+	render.RenderTemplate(w, r, "about.page.tmpl", &models.TemplateData{})
 }
 
 func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
@@ -62,7 +52,7 @@ func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
 func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 	err := r.ParseForm()
 	if err != nil {
-		log.Println(err)
+		helpers.ServerError(w, err)
 		return
 	}
 
@@ -129,7 +119,8 @@ func (m *Repository) AvailabilityJSON(w http.ResponseWriter, r *http.Request) {
 
 	out, err := json.MarshalIndent(resp, "", "    ")
 	if err != nil {
-		log.Println(err)
+		helpers.ServerError(w, err)
+		return
 	}
 
 	w.Header().Set("Content-Type", "application/json")
@@ -143,7 +134,7 @@ func (m *Repository) Contact(w http.ResponseWriter, r *http.Request) {
 func (m *Repository) ReservationSummary(w http.ResponseWriter, r *http.Request) {
 	reservation, ok := m.App.Session.Get(r.Context(), "reservation").(models.Reservation)
 	if !ok {
-		log.Println("cannot get item from session")
+		m.App.ErrorLog.Println("cannot get item from session")
 		m.App.Session.Put(r.Context(), "error", "Can't get reservation from session")
 		http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
 		return
