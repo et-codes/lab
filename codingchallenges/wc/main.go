@@ -15,48 +15,45 @@ func main() {
 	flag.Parse()
 
 	// get filename argument
-	filenameArg := flag.Arg(0)
-	if filenameArg == "" {
-		fmt.Println("No filename provided")
-		os.Exit(1)
+	fileArg := flag.Arg(0)
+	if fileArg == "" {
+		errorAndExit(fmt.Errorf("no filename provided"))
 	}
 
-	filename, err := getPath(filenameArg)
+	filePath, err := getPath(fileArg)
 	if err != nil {
-		fmt.Println("Error parsing path to file:", err.Error())
-		os.Exit(1)
+		newErr := fmt.Errorf("error parsing path to file %q: %s", fileArg, err.Error())
+		errorAndExit(newErr)
 	}
 
 	// check that file exists
-	_, err = os.Stat(filename)
+	_, err = os.Stat(filePath)
 	if err != nil {
-		fmt.Printf("Cannot stat file %q: %s\n", filename, err.Error())
-		os.Exit(1)
+		newErr := fmt.Errorf("cannot stat file %q: %s", filePath, err.Error())
+		errorAndExit(newErr)
 	}
 
 	// process flags
 	if *cFlag {
-		n, err := countBytes(filename)
+		n, err := countBytes(filePath)
 		if err != nil {
-			fmt.Println("ERROR:", err.Error())
-			os.Exit(1)
+			errorAndExit(err)
 		}
-		fmt.Printf("%8d %s\n", n, filename)
+		fmt.Printf("%8d %s\n", n, fileArg)
 	}
 
 	if *lFlag {
-		n, err := countLines(filename)
+		n, err := countLines(filePath)
 		if err != nil {
-			fmt.Println("ERROR:", err.Error())
-			os.Exit(1)
+			errorAndExit(err)
 		}
-		fmt.Printf("%8d %s\n", n, filename)
+		fmt.Printf("%8d %s\n", n, fileArg)
 	}
 }
 
 // countBytes returns the size of the file
-func countBytes(filename string) (int, error) {
-	path, err := getPath(filename)
+func countBytes(filePath string) (int, error) {
+	path, err := getPath(filePath)
 	if err != nil {
 		return 0, err
 	}
@@ -70,8 +67,8 @@ func countBytes(filename string) (int, error) {
 }
 
 // countLines returns the number of lines in the file
-func countLines(filename string) (int, error) {
-	file, err := os.Open(filename)
+func countLines(filePath string) (int, error) {
+	file, err := os.Open(filePath)
 	if err != nil {
 		return 0, err
 	}
@@ -93,4 +90,9 @@ func getPath(filename string) (string, error) {
 		return "", err
 	}
 	return path, nil
+}
+
+func errorAndExit(err error) {
+	fmt.Println("ERROR:", err.Error())
+	os.Exit(1)
 }
