@@ -1,5 +1,56 @@
     Blocking waiting for file lock on package cache
     Blocking waiting for file lock on package cache
-    Blocking waiting for file lock on package cache
-    Blocking waiting for file lock on package cache
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s
+   0.027416635s  INFO prepare_target{force=false package_id=functions v0.1.0 (/Users/eric/repos/github.com/et-codes/lab/rust/functions) target="functions"}: cargo::core::compiler::fingerprint: fingerprint error for functions v0.1.0 (/Users/eric/repos/github.com/et-codes/lab/rust/functions)/Check { test: false }/TargetInner { name: "functions", doc: true, ..: with_path("/Users/eric/repos/github.com/et-codes/lab/rust/functions/src/main.rs", Edition2024) }
+   0.029679920s  INFO prepare_target{force=false package_id=functions v0.1.0 (/Users/eric/repos/github.com/et-codes/lab/rust/functions) target="functions"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/eric/repos/github.com/et-codes/lab/rust/functions/target/debug/.fingerprint/functions-553d1c122963c4b7/bin-functions`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: std::backtrace::Backtrace::capture
+   2: cargo_util::paths::read_bytes
+   3: cargo_util::paths::read
+   4: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   5: cargo::core::compiler::fingerprint::prepare_target
+   6: cargo::core::compiler::compile
+   7: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   8: cargo::ops::cargo_compile::compile_ws
+   9: cargo::ops::cargo_compile::compile_with_exec
+  10: cargo::ops::cargo_compile::compile
+  11: cargo::commands::check::exec
+  12: <cargo::cli::Exec>::exec
+  13: cargo::main
+  14: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  15: std::rt::lang_start::<()>::{closure#0}
+  16: std::rt::lang_start_internal
+  17: _main
+  18: <unknown>
+   0.074605646s  INFO prepare_target{force=false package_id=functions v0.1.0 (/Users/eric/repos/github.com/et-codes/lab/rust/functions) target="functions"}: cargo::core::compiler::fingerprint: fingerprint error for functions v0.1.0 (/Users/eric/repos/github.com/et-codes/lab/rust/functions)/Check { test: true }/TargetInner { name: "functions", doc: true, ..: with_path("/Users/eric/repos/github.com/et-codes/lab/rust/functions/src/main.rs", Edition2024) }
+   0.074619548s  INFO prepare_target{force=false package_id=functions v0.1.0 (/Users/eric/repos/github.com/et-codes/lab/rust/functions) target="functions"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/eric/repos/github.com/et-codes/lab/rust/functions/target/debug/.fingerprint/functions-26920630340e02e2/test-bin-functions`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: std::backtrace::Backtrace::capture
+   2: cargo_util::paths::read_bytes
+   3: cargo_util::paths::read
+   4: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   5: cargo::core::compiler::fingerprint::prepare_target
+   6: cargo::core::compiler::compile
+   7: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   8: cargo::ops::cargo_compile::compile_ws
+   9: cargo::ops::cargo_compile::compile_with_exec
+  10: cargo::ops::cargo_compile::compile
+  11: cargo::commands::check::exec
+  12: <cargo::cli::Exec>::exec
+  13: cargo::main
+  14: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  15: std::rt::lang_start::<()>::{closure#0}
+  16: std::rt::lang_start_internal
+  17: _main
+  18: <unknown>
+    Checking functions v0.1.0 (/Users/eric/repos/github.com/et-codes/lab/rust/functions)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.22s

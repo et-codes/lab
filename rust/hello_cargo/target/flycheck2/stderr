@@ -1,1 +1,57 @@
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+   0.027479016s  INFO prepare_target{force=false package_id=hello_cargo v0.1.0 (/Users/eric/repos/github.com/et-codes/lab/rust/hello_cargo) target="hello_cargo"}: cargo::core::compiler::fingerprint: fingerprint error for hello_cargo v0.1.0 (/Users/eric/repos/github.com/et-codes/lab/rust/hello_cargo)/Check { test: false }/TargetInner { name: "hello_cargo", doc: true, ..: with_path("/Users/eric/repos/github.com/et-codes/lab/rust/hello_cargo/src/main.rs", Edition2024) }
+   0.029680520s  INFO prepare_target{force=false package_id=hello_cargo v0.1.0 (/Users/eric/repos/github.com/et-codes/lab/rust/hello_cargo) target="hello_cargo"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/eric/repos/github.com/et-codes/lab/rust/hello_cargo/target/debug/.fingerprint/hello_cargo-e41e58dc430ad7ac/bin-hello_cargo`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: std::backtrace::Backtrace::capture
+   2: cargo_util::paths::read_bytes
+   3: cargo_util::paths::read
+   4: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   5: cargo::core::compiler::fingerprint::prepare_target
+   6: cargo::core::compiler::compile
+   7: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   8: cargo::ops::cargo_compile::compile_ws
+   9: cargo::ops::cargo_compile::compile_with_exec
+  10: cargo::ops::cargo_compile::compile
+  11: cargo::commands::check::exec
+  12: <cargo::cli::Exec>::exec
+  13: cargo::main
+  14: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  15: std::rt::lang_start::<()>::{closure#0}
+  16: std::rt::lang_start_internal
+  17: _main
+  18: <unknown>
+   0.074598780s  INFO prepare_target{force=false package_id=hello_cargo v0.1.0 (/Users/eric/repos/github.com/et-codes/lab/rust/hello_cargo) target="hello_cargo"}: cargo::core::compiler::fingerprint: fingerprint error for hello_cargo v0.1.0 (/Users/eric/repos/github.com/et-codes/lab/rust/hello_cargo)/Check { test: true }/TargetInner { name: "hello_cargo", doc: true, ..: with_path("/Users/eric/repos/github.com/et-codes/lab/rust/hello_cargo/src/main.rs", Edition2024) }
+   0.074612335s  INFO prepare_target{force=false package_id=hello_cargo v0.1.0 (/Users/eric/repos/github.com/et-codes/lab/rust/hello_cargo) target="hello_cargo"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/eric/repos/github.com/et-codes/lab/rust/hello_cargo/target/debug/.fingerprint/hello_cargo-46ee5b229ad23ff7/test-bin-hello_cargo`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: std::backtrace::Backtrace::capture
+   2: cargo_util::paths::read_bytes
+   3: cargo_util::paths::read
+   4: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   5: cargo::core::compiler::fingerprint::prepare_target
+   6: cargo::core::compiler::compile
+   7: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   8: cargo::ops::cargo_compile::compile_ws
+   9: cargo::ops::cargo_compile::compile_with_exec
+  10: cargo::ops::cargo_compile::compile
+  11: cargo::commands::check::exec
+  12: <cargo::cli::Exec>::exec
+  13: cargo::main
+  14: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  15: std::rt::lang_start::<()>::{closure#0}
+  16: std::rt::lang_start_internal
+  17: _main
+  18: <unknown>
+    Checking hello_cargo v0.1.0 (/Users/eric/repos/github.com/et-codes/lab/rust/hello_cargo)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.22s

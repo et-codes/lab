@@ -1,12 +1,58 @@
-   0.003155708s  INFO prepare_target{force=false package_id=loops v0.1.0 (/Users/eric/repos/github.com/et-codes/lab/rust/loops) target="loops"}: cargo::core::compiler::fingerprint: stale: changed "/Users/eric/repos/github.com/et-codes/lab/rust/loops/src/main.rs"
-   0.003166750s  INFO prepare_target{force=false package_id=loops v0.1.0 (/Users/eric/repos/github.com/et-codes/lab/rust/loops) target="loops"}: cargo::core::compiler::fingerprint:           (vs) "/Users/eric/repos/github.com/et-codes/lab/rust/loops/target/debug/.fingerprint/loops-ef9a6e23444ac634/dep-bin-loops"
-   0.003170708s  INFO prepare_target{force=false package_id=loops v0.1.0 (/Users/eric/repos/github.com/et-codes/lab/rust/loops) target="loops"}: cargo::core::compiler::fingerprint:                FileTime { seconds: 1762719595, nanos: 681971384 } < FileTime { seconds: 1762719730, nanos: 306983171 }
-   0.003211916s  INFO prepare_target{force=false package_id=loops v0.1.0 (/Users/eric/repos/github.com/et-codes/lab/rust/loops) target="loops"}: cargo::core::compiler::fingerprint: fingerprint dirty for loops v0.1.0 (/Users/eric/repos/github.com/et-codes/lab/rust/loops)/Check { test: false }/TargetInner { name: "loops", doc: true, ..: with_path("/Users/eric/repos/github.com/et-codes/lab/rust/loops/src/main.rs", Edition2024) }
-   0.003221708s  INFO prepare_target{force=false package_id=loops v0.1.0 (/Users/eric/repos/github.com/et-codes/lab/rust/loops) target="loops"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(StaleItem(ChangedFile { reference: "/Users/eric/repos/github.com/et-codes/lab/rust/loops/target/debug/.fingerprint/loops-ef9a6e23444ac634/dep-bin-loops", reference_mtime: FileTime { seconds: 1762719595, nanos: 681971384 }, stale: "/Users/eric/repos/github.com/et-codes/lab/rust/loops/src/main.rs", stale_mtime: FileTime { seconds: 1762719730, nanos: 306983171 } }))
-   0.003416875s  INFO prepare_target{force=false package_id=loops v0.1.0 (/Users/eric/repos/github.com/et-codes/lab/rust/loops) target="loops"}: cargo::core::compiler::fingerprint: stale: changed "/Users/eric/repos/github.com/et-codes/lab/rust/loops/src/main.rs"
-   0.003420500s  INFO prepare_target{force=false package_id=loops v0.1.0 (/Users/eric/repos/github.com/et-codes/lab/rust/loops) target="loops"}: cargo::core::compiler::fingerprint:           (vs) "/Users/eric/repos/github.com/et-codes/lab/rust/loops/target/debug/.fingerprint/loops-44d0f3dd12b175f9/dep-test-bin-loops"
-   0.003422875s  INFO prepare_target{force=false package_id=loops v0.1.0 (/Users/eric/repos/github.com/et-codes/lab/rust/loops) target="loops"}: cargo::core::compiler::fingerprint:                FileTime { seconds: 1762719595, nanos: 681980217 } < FileTime { seconds: 1762719730, nanos: 306983171 }
-   0.003452541s  INFO prepare_target{force=false package_id=loops v0.1.0 (/Users/eric/repos/github.com/et-codes/lab/rust/loops) target="loops"}: cargo::core::compiler::fingerprint: fingerprint dirty for loops v0.1.0 (/Users/eric/repos/github.com/et-codes/lab/rust/loops)/Check { test: true }/TargetInner { name: "loops", doc: true, ..: with_path("/Users/eric/repos/github.com/et-codes/lab/rust/loops/src/main.rs", Edition2024) }
-   0.003459708s  INFO prepare_target{force=false package_id=loops v0.1.0 (/Users/eric/repos/github.com/et-codes/lab/rust/loops) target="loops"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(StaleItem(ChangedFile { reference: "/Users/eric/repos/github.com/et-codes/lab/rust/loops/target/debug/.fingerprint/loops-44d0f3dd12b175f9/dep-test-bin-loops", reference_mtime: FileTime { seconds: 1762719595, nanos: 681980217 }, stale: "/Users/eric/repos/github.com/et-codes/lab/rust/loops/src/main.rs", stale_mtime: FileTime { seconds: 1762719730, nanos: 306983171 } }))
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+   0.035869679s  INFO prepare_target{force=false package_id=loops v0.1.0 (/Users/eric/repos/github.com/et-codes/lab/rust/loops) target="loops"}: cargo::core::compiler::fingerprint: fingerprint error for loops v0.1.0 (/Users/eric/repos/github.com/et-codes/lab/rust/loops)/Check { test: false }/TargetInner { name: "loops", doc: true, ..: with_path("/Users/eric/repos/github.com/et-codes/lab/rust/loops/src/main.rs", Edition2024) }
+   0.038081197s  INFO prepare_target{force=false package_id=loops v0.1.0 (/Users/eric/repos/github.com/et-codes/lab/rust/loops) target="loops"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/eric/repos/github.com/et-codes/lab/rust/loops/target/debug/.fingerprint/loops-b9982abec494f266/bin-loops`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: std::backtrace::Backtrace::capture
+   2: cargo_util::paths::read_bytes
+   3: cargo_util::paths::read
+   4: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   5: cargo::core::compiler::fingerprint::prepare_target
+   6: cargo::core::compiler::compile
+   7: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   8: cargo::ops::cargo_compile::compile_ws
+   9: cargo::ops::cargo_compile::compile_with_exec
+  10: cargo::ops::cargo_compile::compile
+  11: cargo::commands::check::exec
+  12: <cargo::cli::Exec>::exec
+  13: cargo::main
+  14: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  15: std::rt::lang_start::<()>::{closure#0}
+  16: std::rt::lang_start_internal
+  17: _main
+  18: <unknown>
+   0.083004483s  INFO prepare_target{force=false package_id=loops v0.1.0 (/Users/eric/repos/github.com/et-codes/lab/rust/loops) target="loops"}: cargo::core::compiler::fingerprint: fingerprint error for loops v0.1.0 (/Users/eric/repos/github.com/et-codes/lab/rust/loops)/Check { test: true }/TargetInner { name: "loops", doc: true, ..: with_path("/Users/eric/repos/github.com/et-codes/lab/rust/loops/src/main.rs", Edition2024) }
+   0.083021627s  INFO prepare_target{force=false package_id=loops v0.1.0 (/Users/eric/repos/github.com/et-codes/lab/rust/loops) target="loops"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/eric/repos/github.com/et-codes/lab/rust/loops/target/debug/.fingerprint/loops-75368ce3a6e73254/test-bin-loops`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: std::backtrace::Backtrace::capture
+   2: cargo_util::paths::read_bytes
+   3: cargo_util::paths::read
+   4: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   5: cargo::core::compiler::fingerprint::prepare_target
+   6: cargo::core::compiler::compile
+   7: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   8: cargo::ops::cargo_compile::compile_ws
+   9: cargo::ops::cargo_compile::compile_with_exec
+  10: cargo::ops::cargo_compile::compile
+  11: cargo::commands::check::exec
+  12: <cargo::cli::Exec>::exec
+  13: cargo::main
+  14: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  15: std::rt::lang_start::<()>::{closure#0}
+  16: std::rt::lang_start_internal
+  17: _main
+  18: <unknown>
     Checking loops v0.1.0 (/Users/eric/repos/github.com/et-codes/lab/rust/loops)
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.03s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.25s

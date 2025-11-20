@@ -1,4 +1,57 @@
     Blocking waiting for file lock on package cache
     Blocking waiting for file lock on package cache
     Blocking waiting for file lock on package cache
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s
+   0.033196958s  INFO prepare_target{force=false package_id=variables v0.1.0 (/Users/eric/repos/github.com/et-codes/lab/rust/variables) target="variables"}: cargo::core::compiler::fingerprint: fingerprint error for variables v0.1.0 (/Users/eric/repos/github.com/et-codes/lab/rust/variables)/Check { test: false }/TargetInner { name: "variables", doc: true, ..: with_path("/Users/eric/repos/github.com/et-codes/lab/rust/variables/src/main.rs", Edition2024) }
+   0.035400712s  INFO prepare_target{force=false package_id=variables v0.1.0 (/Users/eric/repos/github.com/et-codes/lab/rust/variables) target="variables"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/eric/repos/github.com/et-codes/lab/rust/variables/target/debug/.fingerprint/variables-a45d8e6b0a3949e1/bin-variables`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: std::backtrace::Backtrace::capture
+   2: cargo_util::paths::read_bytes
+   3: cargo_util::paths::read
+   4: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   5: cargo::core::compiler::fingerprint::prepare_target
+   6: cargo::core::compiler::compile
+   7: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   8: cargo::ops::cargo_compile::compile_ws
+   9: cargo::ops::cargo_compile::compile_with_exec
+  10: cargo::ops::cargo_compile::compile
+  11: cargo::commands::check::exec
+  12: <cargo::cli::Exec>::exec
+  13: cargo::main
+  14: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  15: std::rt::lang_start::<()>::{closure#0}
+  16: std::rt::lang_start_internal
+  17: _main
+  18: <unknown>
+   0.080273837s  INFO prepare_target{force=false package_id=variables v0.1.0 (/Users/eric/repos/github.com/et-codes/lab/rust/variables) target="variables"}: cargo::core::compiler::fingerprint: fingerprint error for variables v0.1.0 (/Users/eric/repos/github.com/et-codes/lab/rust/variables)/Check { test: true }/TargetInner { name: "variables", doc: true, ..: with_path("/Users/eric/repos/github.com/et-codes/lab/rust/variables/src/main.rs", Edition2024) }
+   0.080289930s  INFO prepare_target{force=false package_id=variables v0.1.0 (/Users/eric/repos/github.com/et-codes/lab/rust/variables) target="variables"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/eric/repos/github.com/et-codes/lab/rust/variables/target/debug/.fingerprint/variables-632e7801fce11d3c/test-bin-variables`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: std::backtrace::Backtrace::capture
+   2: cargo_util::paths::read_bytes
+   3: cargo_util::paths::read
+   4: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   5: cargo::core::compiler::fingerprint::prepare_target
+   6: cargo::core::compiler::compile
+   7: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   8: cargo::ops::cargo_compile::compile_ws
+   9: cargo::ops::cargo_compile::compile_with_exec
+  10: cargo::ops::cargo_compile::compile
+  11: cargo::commands::check::exec
+  12: <cargo::cli::Exec>::exec
+  13: cargo::main
+  14: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  15: std::rt::lang_start::<()>::{closure#0}
+  16: std::rt::lang_start_internal
+  17: _main
+  18: <unknown>
+    Checking variables v0.1.0 (/Users/eric/repos/github.com/et-codes/lab/rust/variables)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.26s
