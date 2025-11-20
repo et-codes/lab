@@ -2,6 +2,7 @@ package jsonparser
 
 import (
 	"fmt"
+	"io"
 	"os"
 )
 
@@ -21,12 +22,25 @@ func (j *JSONParser) Run() int {
 		return 1
 	}
 
-	reader, err := os.Open(j.args[0])
+	file, err := os.Open(j.args[0])
 	if err != nil {
 		fmt.Println(err)
 		return 1
 	}
-	defer reader.Close()
+	defer file.Close()
+
+	data, err := io.ReadAll(file)
+	if err != nil {
+		fmt.Println(err)
+		return 1
+	}
+
+	err = j.Parse(data)
+	if err != nil {
+		fmt.Println(err)
+		return 1
+	}
+
 	return 0
 }
 
